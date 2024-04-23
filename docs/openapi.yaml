@@ -1,0 +1,84 @@
+openapi: 3.0.1
+info:
+  title: Jwt Challenge
+  description: |-
+    Api de Validação de Jwt
+  version: 1.0.11
+servers:
+  - url: http://localhost:8080
+tags:
+  - name: Health
+    description: Endpoint para verificar se a aplicação está UP
+  - name: Jwt
+    description: Endpoints para validação Jwt
+
+paths:
+  /v1/actuator:
+    get:
+      tags:
+        - "Health"
+      description: |
+        Retorna se a aplicação está UP
+      summary: Health
+      responses:
+        "200":
+          description: "successful operation"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthResponse'
+  /jwt/v1:
+    post:
+      tags:
+        - Jwt
+      summary: validar jwt via body
+      description: valida o jwt via body
+
+      requestBody:
+        description: requisição do jwt
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JwtRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            text/html:
+              schema:
+                type: boolean
+  /jwt/v2:
+    post:
+      tags:
+        - Jwt
+      summary: validar jwt via header
+      description: valida o jwt via header
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: 'eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJTZWVkIjoiNzg0MSIsIk5hbWUiOiJUb25pbmhvIEFyYXVqbyJ9.QY05sIjtrcJnP533kQNk8QXcaleJ1Q01jWY_ZzIZuAg'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            text/html:
+              schema:
+                type: boolean
+components:
+  schemas:
+    HealthResponse:
+      type: object
+      properties:
+        status:
+          description: status da api
+          type: string
+          example: "UP!"
+    JwtRequest:
+      type: object
+      properties:
+        jwt:
+          type: string
+          example: 'eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJTZWVkIjoiNzg0MSIsIk5hbWUiOiJUb25pbmhvIEFyYXVqbyJ9.QY05sIjtrcJnP533kQNk8QXcaleJ1Q01jWY_ZzIZuAg'
