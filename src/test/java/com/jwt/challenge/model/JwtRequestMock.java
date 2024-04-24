@@ -34,6 +34,10 @@ public class JwtRequestMock {
         return new JwtRequest("eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJOYW1lIjoiVG9uaW5obyBBcmF1am8ifQ.Incs7uhGp266QhwxZ22uzFiHC1W4NWuPOJT3rWX6A7g");
     }
 
+    public static JwtRequest invalidClaimMock() {
+        return new JwtRequest("eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJTZWVlZCI6Ijc4NDEiLCJOYW1lIjoiVG9uaW5obyBBcmF1am8ifQ.OGsVjJK3t-0MLRusVn8cYrOkVNDpAgxijhnVkinP19A");
+    }
+
 
 
 }

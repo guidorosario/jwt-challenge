@@ -14,6 +14,10 @@ public class JwtException extends RuntimeException {
         this.error = error;
     }
 
+    public JwtException() {
+
+    }
+
     public int getHttpStatus() {
         return httpStatus;
     }

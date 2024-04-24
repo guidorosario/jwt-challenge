@@ -272,6 +272,39 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Body - Validar Jwt  com Claims não permitidos",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"jwt\": \"{{invalidClaim}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/jwt/v1/validate",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"jwt",
+								"v1",
+								"validate"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -504,6 +537,37 @@
 								{
 									"key": "token",
 									"value": "{{claimNameExceedSize}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/jwt/v2/validate",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"jwt",
+								"v2",
+								"validate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Header -  Validar Jwt  com Claims não permitidos",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{invalidClaim}}",
 									"type": "string"
 								}
 							]

@@ -1,6 +1,6 @@
 package com.jwt.challenge.service;
 
-import com.jwt.challenge.service.impl.ValidatorClaimService;
+import com.jwt.challenge.service.impl.ValidatorClaimServiceImpl;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -15,10 +15,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(SpringExtension.class)
 @AutoConfigureMockMvc
-public class ValidatorClaimServiceTest {
+public class ValidatorClaimServiceImplTest {
 
     @InjectMocks
-    private ValidatorClaimService validatorClaimService;
+    private ValidatorClaimServiceImpl validatorClaimServiceImpl;
 
 
     @Test
@@ -27,7 +27,7 @@ public class ValidatorClaimServiceTest {
 
         var claim = decodeJwt(validJwtMock().jwt());
 
-        assertTrue(validatorClaimService.verifyNumberOfClaims(claim));
+        assertTrue(validatorClaimServiceImpl.verifyNumberOfClaims(claim));
     }
 
     @Test
@@ -36,7 +36,7 @@ public class ValidatorClaimServiceTest {
 
         var claim = decodeJwt(invalidJwtClaimExceedMock().jwt());
 
-        assertFalse(validatorClaimService.verifyNumberOfClaims(claim));
+        assertFalse(validatorClaimServiceImpl.verifyNumberOfClaims(claim));
     }
 
     @Test
@@ -45,7 +45,7 @@ public class ValidatorClaimServiceTest {
 
         var claim = decodeJwt(validJwtMock().jwt());
 
-        assertTrue(validatorClaimService.verifyDigitClaimName(claim));
+        assertTrue(validatorClaimServiceImpl.verifyDigitClaimName(claim));
     }
 
     @Test
@@ -54,7 +54,25 @@ public class ValidatorClaimServiceTest {
 
         var claim = decodeJwt(invalidJwtDigitClaimNameMock().jwt());
 
-        assertFalse(validatorClaimService.verifyDigitClaimName(claim));
+        assertFalse(validatorClaimServiceImpl.verifyDigitClaimName(claim));
+    }
+
+    @Test
+    @DisplayName("Deve retornar true para claim permitido")
+    void shouldTrueValidClaims() {
+
+        var claim = decodeJwt(validJwtMock().jwt());
+
+        assertTrue(validatorClaimServiceImpl.verifyClaims(claim));
+    }
+
+    @Test
+    @DisplayName("Deve retornar false para claims não permitido")
+    void shouldFalseInvalidClaims() {
+
+        var claim = decodeJwt(invalidClaimMock().jwt());
+
+        assertFalse(validatorClaimServiceImpl.verifyClaims(claim));
     }
 
     @Test
@@ -63,7 +81,7 @@ public class ValidatorClaimServiceTest {
 
         var claim = decodeJwt(validJwtMock().jwt());
 
-        assertTrue(validatorClaimService.verifyClaimRole(claim));
+        assertTrue(validatorClaimServiceImpl.verifyClaimRole(claim));
     }
 
     @Test
@@ -72,7 +90,7 @@ public class ValidatorClaimServiceTest {
 
         var claim = decodeJwt(invalidJwtClaimRoleMock().jwt());
 
-        assertFalse(validatorClaimService.verifyClaimRole(claim));
+        assertFalse(validatorClaimServiceImpl.verifyClaimRole(claim));
 
     }
 
@@ -82,7 +100,7 @@ public class ValidatorClaimServiceTest {
 
         var claim = decodeJwt(validJwtMock().jwt());
 
-        assertTrue(validatorClaimService.verifyPrimeNumberOnClaimSeed(claim));
+        assertTrue(validatorClaimServiceImpl.verifyPrimeNumberOnClaimSeed(claim));
     }
 
     @Test
@@ -91,7 +109,7 @@ public class ValidatorClaimServiceTest {
 
         var claim = decodeJwt(invalidJwtClaimSeedNoPrimeMock().jwt());
 
-      assertFalse(validatorClaimService.verifyPrimeNumberOnClaimSeed(claim));
+      assertFalse(validatorClaimServiceImpl.verifyPrimeNumberOnClaimSeed(claim));
     }
 
     @Test
@@ -100,7 +118,7 @@ public class ValidatorClaimServiceTest {
 
         var claim = decodeJwt(validJwtMock().jwt());
 
-        assertTrue(validatorClaimService.verifySizeOnClaimName(claim));
+        assertTrue(validatorClaimServiceImpl.verifySizeOnClaimName(claim));
     }
 
     @Test
@@ -109,7 +127,7 @@ public class ValidatorClaimServiceTest {
 
         var claim = decodeJwt(invalidJwtClaimNameSizeExceedMock().jwt());
 
-        assertFalse(validatorClaimService.verifySizeOnClaimName(claim));
+        assertFalse(validatorClaimServiceImpl.verifySizeOnClaimName(claim));
 
     }
 }

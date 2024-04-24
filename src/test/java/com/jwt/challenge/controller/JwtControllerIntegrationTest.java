@@ -1,7 +1,8 @@
 package com.jwt.challenge.controller;
 
-import com.jwt.challenge.service.impl.JwtServiceImpl;
-import com.jwt.challenge.service.impl.ValidatorClaimService;
+import com.jwt.challenge.service.impl.JwtValidatorServiceImpl;
+import com.jwt.challenge.service.impl.TokenResolverServiceImpl;
+import com.jwt.challenge.service.impl.ValidatorClaimServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -14,10 +15,9 @@ import org.springframework.test.web.reactive.server.WebTestClient;
 import org.springframework.web.reactive.function.BodyInserters;
 
 import static com.jwt.challenge.model.JwtRequestMock.*;
-import static com.jwt.challenge.model.JwtRequestMock.validJwtMock;
 
 @WebFluxTest(controllers = JwtController.class, excludeAutoConfiguration = {ReactiveSecurityAutoConfiguration.class})
-@Import({ValidatorClaimService.class, JwtServiceImpl.class})
+@Import({ValidatorClaimServiceImpl.class, TokenResolverServiceImpl.class, JwtValidatorServiceImpl.class})
 public class JwtControllerIntegrationTest {
 
     @Autowired
@@ -159,6 +159,23 @@ public class JwtControllerIntegrationTest {
 
 
     @Test
+    @DisplayName("Testando jwt com Claim não permitido retornando false")
+    void jwtInvalidClaimFalse() {
+
+        webTestClient
+                .post()
+                .uri("/jwt/v1/validate")
+                .body(BodyInserters.fromValue(invalidClaimMock()))
+                .exchange()
+                .expectStatus()
+                .is2xxSuccessful()
+                .expectBody()
+                .jsonPath("$")
+                .isEqualTo(false);
+    }
+
+
+    @Test
     @DisplayName("Testando jwt no Header valido retornando true")
     void validHeaderJwtShouldTrue() {
 
@@ -279,6 +296,23 @@ public class JwtControllerIntegrationTest {
                 .post()
                 .uri("/jwt/v2/validate")
                 .header("Authorization",invalidJwtClaimNameSizeExceedMock().jwt())
+                .exchange()
+                .expectStatus()
+                .is2xxSuccessful()
+                .expectBody()
+                .jsonPath("$")
+                .isEqualTo(false);
+    }
+
+
+    @Test
+    @DisplayName("Testando jwt no header com Claim não permitido retornando false")
+    void jwtHeaderInvalidClaimFalse() {
+
+        webTestClient
+                .post()
+                .uri("/jwt/v2/validate")
+                .header("Authorization", invalidClaimMock().jwt())
                 .exchange()
                 .expectStatus()
                 .is2xxSuccessful()

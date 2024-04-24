@@ -2,6 +2,7 @@ package com.jwt.challenge.service.impl;
 
 import com.google.gson.JsonObject;
 import com.jwt.challenge.enums.RoleEnum;
+import com.jwt.challenge.service.ValidatorClaimService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -11,10 +12,11 @@ import static com.jwt.challenge.constraint.Claims.*;
 import static com.jwt.challenge.constraint.Claims.NAME;
 
 @Service
-public class ValidatorClaimService {
-    private static final Logger LOG = LoggerFactory.getLogger(JwtServiceImpl.class);
+public class ValidatorClaimServiceImpl implements ValidatorClaimService {
+    private static final Logger LOG = LoggerFactory.getLogger(ValidatorClaimServiceImpl.class);
 
 
+    @Override
     public Boolean verifyNumberOfClaims(JsonObject claim) {
         if (claim.size() != 3) {
             LOG.info("jwt possui mais ou menos de 3 claims");
@@ -25,6 +27,18 @@ public class ValidatorClaimService {
         }
     }
 
+    @Override
+    public Boolean verifyClaims(JsonObject claim) {
+        if (claim.keySet().contains(NAME) && claim.keySet().contains(SEED) && claim.keySet().contains(ROLE)) {
+            LOG.info("jwt possui todos os claim permitidos");
+            return true;
+        } else {
+            LOG.info("jwt possui claim nao permitido");
+            return false;
+        }
+    }
+
+    @Override
     public Boolean verifyDigitClaimName(JsonObject claim) {
         if (claim.get(NAME).getAsString().matches(DIGIT)) {
             LOG.info("Claim Name possui digitos");
@@ -35,6 +49,7 @@ public class ValidatorClaimService {
         }
     }
 
+    @Override
     public Boolean verifyClaimRole(JsonObject claim) {
         if(RoleEnum.fromEnum(claim.get(ROLE).getAsString()).equals(RoleEnum.NONE)){
             LOG.info("Claim Role invalido");
@@ -45,6 +60,7 @@ public class ValidatorClaimService {
         }
     }
 
+    @Override
     public Boolean verifyPrimeNumberOnClaimSeed(JsonObject claim) {
         if(!isPrime(claim.get(SEED).getAsInt())){
             LOG.info("Claim Seed nao é um numero primo");
@@ -55,6 +71,7 @@ public class ValidatorClaimService {
         }
     }
 
+    @Override
     public Boolean verifySizeOnClaimName(JsonObject claim) {
         if(claim.get(NAME).getAsString().length()> 256){
             LOG.info("Claim Name possui mais que 256 carateres");
