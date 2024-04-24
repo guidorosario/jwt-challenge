@@ -36,7 +36,7 @@ Na realização dos testes integrados foi ultilizado `WebTestClient` e nos teste
 Para verificar a cobertura de teste foi ultilizado o `jacoco` e para observability foi
 utilizado o `Spring Cloud Sleuth`
 
-O projeto segue o pattern `Controller-Sevice-Repository`
+O projeto segue o pattern `Controller-Service-Repository`
 
 ## Rodando a aplicação:
 
