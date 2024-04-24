@@ -15,7 +15,7 @@ public class ValidatorClaimService {
     private static final Logger LOG = LoggerFactory.getLogger(JwtServiceImpl.class);
 
 
-    public Boolean validateNumberOfClaims(JsonObject claim) {
+    public Boolean verifyNumberOfClaims(JsonObject claim) {
         if (claim.size() != 3) {
             LOG.info("jwt possui mais ou menos de 3 claims");
             return false;
@@ -25,7 +25,7 @@ public class ValidatorClaimService {
         }
     }
 
-    public Boolean validateDigitClaimName(JsonObject claim) {
+    public Boolean verifyDigitClaimName(JsonObject claim) {
         if (claim.get(NAME).getAsString().matches(DIGIT)) {
             LOG.info("Claim Name possui digitos");
             return false;
@@ -35,7 +35,7 @@ public class ValidatorClaimService {
         }
     }
 
-    public Boolean validateNameClaimRole(JsonObject claim) {
+    public Boolean verifyClaimRole(JsonObject claim) {
         if(RoleEnum.fromEnum(claim.get(ROLE).getAsString()).equals(RoleEnum.NONE)){
             LOG.info("Claim Role invalido");
             return false;
@@ -45,7 +45,7 @@ public class ValidatorClaimService {
         }
     }
 
-    public Boolean validatePrimeNumberOnClaimSeed(JsonObject claim) {
+    public Boolean verifyPrimeNumberOnClaimSeed(JsonObject claim) {
         if(!isPrime(claim.get(SEED).getAsInt())){
             LOG.info("Claim Seed nao é um numero primo");
             return false;
@@ -55,7 +55,7 @@ public class ValidatorClaimService {
         }
     }
 
-    public Boolean validateSizeOnClaimName(JsonObject claim) {
+    public Boolean verifySizeOnClaimName(JsonObject claim) {
         if(claim.get(NAME).getAsString().length()> 256){
             LOG.info("Claim Name possui mais que 256 carateres");
             return false;

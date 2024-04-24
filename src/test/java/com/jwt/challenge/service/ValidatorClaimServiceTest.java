@@ -27,7 +27,7 @@ public class ValidatorClaimServiceTest {
 
         var claim = decodeJwt(validJwtMock().jwt());
 
-        assertTrue(validatorClaimService.validateNumberOfClaims(claim));
+        assertTrue(validatorClaimService.verifyNumberOfClaims(claim));
     }
 
     @Test
@@ -36,7 +36,7 @@ public class ValidatorClaimServiceTest {
 
         var claim = decodeJwt(invalidJwtClaimExceedMock().jwt());
 
-        assertFalse(validatorClaimService.validateNumberOfClaims(claim));
+        assertFalse(validatorClaimService.verifyNumberOfClaims(claim));
     }
 
     @Test
@@ -45,7 +45,7 @@ public class ValidatorClaimServiceTest {
 
         var claim = decodeJwt(validJwtMock().jwt());
 
-        assertTrue(validatorClaimService.validateDigitClaimName (claim));
+        assertTrue(validatorClaimService.verifyDigitClaimName(claim));
     }
 
     @Test
@@ -54,7 +54,7 @@ public class ValidatorClaimServiceTest {
 
         var claim = decodeJwt(invalidJwtDigitClaimNameMock().jwt());
 
-        assertFalse(validatorClaimService.validateDigitClaimName(claim));
+        assertFalse(validatorClaimService.verifyDigitClaimName(claim));
     }
 
     @Test
@@ -63,7 +63,7 @@ public class ValidatorClaimServiceTest {
 
         var claim = decodeJwt(validJwtMock().jwt());
 
-        assertTrue(validatorClaimService.validateNameClaimRole(claim));
+        assertTrue(validatorClaimService.verifyClaimRole(claim));
     }
 
     @Test
@@ -72,7 +72,7 @@ public class ValidatorClaimServiceTest {
 
         var claim = decodeJwt(invalidJwtClaimRoleMock().jwt());
 
-        assertFalse(validatorClaimService.validateNameClaimRole(claim));
+        assertFalse(validatorClaimService.verifyClaimRole(claim));
 
     }
 
@@ -82,7 +82,7 @@ public class ValidatorClaimServiceTest {
 
         var claim = decodeJwt(validJwtMock().jwt());
 
-        assertTrue(validatorClaimService.validatePrimeNumberOnClaimSeed(claim));
+        assertTrue(validatorClaimService.verifyPrimeNumberOnClaimSeed(claim));
     }
 
     @Test
@@ -91,7 +91,7 @@ public class ValidatorClaimServiceTest {
 
         var claim = decodeJwt(invalidJwtClaimSeedNoPrimeMock().jwt());
 
-      assertFalse(validatorClaimService.validatePrimeNumberOnClaimSeed(claim));
+      assertFalse(validatorClaimService.verifyPrimeNumberOnClaimSeed(claim));
     }
 
     @Test
@@ -100,7 +100,7 @@ public class ValidatorClaimServiceTest {
 
         var claim = decodeJwt(validJwtMock().jwt());
 
-        assertTrue(validatorClaimService.validateSizeOnClaimName(claim));
+        assertTrue(validatorClaimService.verifySizeOnClaimName(claim));
     }
 
     @Test
@@ -109,7 +109,7 @@ public class ValidatorClaimServiceTest {
 
         var claim = decodeJwt(invalidJwtClaimNameSizeExceedMock().jwt());
 
-        assertFalse(validatorClaimService.validateSizeOnClaimName(claim));
+        assertFalse(validatorClaimService.verifySizeOnClaimName(claim));
 
     }
 }

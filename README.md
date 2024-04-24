@@ -11,6 +11,32 @@ Api de Validação de Jwt
     - [**Gradle**](https://docs.gradle.org/current/userguide/userguide.html) | _or use the wrapper ./gradlew_
     - [**Spring Boot 2**](https://spring.io/projects/spring-boot)
     - [**Docker**](https://docs.docker.com/docker-for-mac/install/#download-docker-for-mac)
+## Descrição
+Microserviços de validação de jwt, utilizando Java 17, Spring 2.x e Webflux.
+Para o desenvolvimento da solução foi criada uma `JwtServiceImpl` que decodifica o Jwt
+e utiliza o Gson para converter a String em um JsonObject, caso algum erro na
+na conversão pro JsonObject, significa que o Jwt é invalido retornan `false`
+após a conversão do Jwt é ultilizado o `.filter()` do webflux para chamar a os metodos 
+da classe `ValidatorClaimService`, onde nela é realizado as regras de negócios, sendo que os seus metodos são:
+
+`verifyNumberOfClaims` verifica a quantidade de claims no Jwt
+
+`verifyDigitClaimName` verifica se o Claim Name possui digito
+
+`verifyClaimRole` verifica se o Claim Role é Valido
+
+`verifyPrimeNumberOnClaimSeed` verifica se o Claim Seed é primo
+
+`verifySizeOnClaimName` verifica se o Claim name tem mais de 256 caracteres
+
+Caso passar por todas as veficicações retorna um booleano `true` caso não retorna `false`
+
+Na realização dos testes integrados foi ultilizado `WebTestClient` e nos teste unitários `JUnit`
+
+Para verificar a cobertura de teste foi ultilizado o `jacoco` e para observability foi
+utilizado o `Spring Cloud Sleuth`
+
+O projeto segue o pattern `Controller-Sevice-Repository`
 
 ## Rodando a aplicação:
 

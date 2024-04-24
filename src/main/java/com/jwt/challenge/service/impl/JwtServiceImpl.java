@@ -3,7 +3,6 @@ package com.jwt.challenge.service.impl;
 import com.jwt.challenge.service.JwtService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.autoconfigure.security.oauth2.resource.OAuth2ResourceServerProperties;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
@@ -24,11 +23,11 @@ public class JwtServiceImpl implements JwtService {
 
        return Mono.just(decodeJwt(jwt))
                .filter(claim -> !claim.isEmpty())
-               .filter(validatorClaimService::validateNumberOfClaims)
-               .filter(validatorClaimService::validateDigitClaimName)
-               .filter(validatorClaimService::validateNameClaimRole)
-               .filter(validatorClaimService::validatePrimeNumberOnClaimSeed)
-               .filter(validatorClaimService::validateSizeOnClaimName)
+               .filter(validatorClaimService::verifyNumberOfClaims)
+               .filter(validatorClaimService::verifyDigitClaimName)
+               .filter(validatorClaimService::verifyClaimRole)
+               .filter(validatorClaimService::verifyPrimeNumberOnClaimSeed)
+               .filter(validatorClaimService::verifySizeOnClaimName)
                .map(claim -> {
                    LOG.info("Jwt validado com sucesso");
                    return true;
