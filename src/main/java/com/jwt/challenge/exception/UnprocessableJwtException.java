@@ -1,5 +1,7 @@
 package com.jwt.challenge.exception;
 
+import static org.springframework.http.HttpStatus.UNPROCESSABLE_ENTITY;
+
 public class UnprocessableJwtException extends JwtException {
 
     public UnprocessableJwtException() {
@@ -7,6 +9,6 @@ public class UnprocessableJwtException extends JwtException {
     }
 
     public UnprocessableJwtException(String errorCode, String description) {
-        super(500, errorCode, description);
+        super(UNPROCESSABLE_ENTITY.value(), errorCode, description);
     }
 }
