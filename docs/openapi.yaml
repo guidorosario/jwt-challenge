@@ -13,7 +13,7 @@ tags:
     description: Endpoints para validação Jwt
 
 paths:
-  /v1/actuator:
+  /actuator:
     get:
       tags:
         - "Health"
@@ -27,7 +27,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HealthResponse'
-  /jwt/v1:
+  /jwt/v1/validate:
     post:
       tags:
         - Jwt
@@ -48,7 +48,7 @@ paths:
             text/html:
               schema:
                 type: boolean
-  /jwt/v2:
+  /jwt/v2/validate:
     post:
       tags:
         - Jwt

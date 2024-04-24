@@ -16,13 +16,13 @@ public class JwtController {
     }
 
     @PostMapping
-    @RequestMapping("/v1")
+    @RequestMapping("/v1/validate")
     public Mono<Boolean> validateJwt(@RequestBody JwtRequest jwtRequest){
        return jwtService.validatorJwt(jwtRequest.jwt());
     }
 
     @PostMapping
-    @RequestMapping("/v2")
+    @RequestMapping("/v2/validate")
     public Mono<Boolean> validateJwtV2(@RequestHeader (name="Authorization") String token) {
         return jwtService.validatorJwt(token);
     }

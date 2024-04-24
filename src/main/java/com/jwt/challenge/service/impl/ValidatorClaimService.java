@@ -27,7 +27,7 @@ public class ValidatorClaimService {
 
     public Boolean validateDigitClaimName(JsonObject claim) {
         if (claim.get(NAME).getAsString().matches(DIGIT)) {
-            LOG.info("Claim name possui digitos");
+            LOG.info("Claim Name possui digitos");
             return false;
         } else {
             LOG.info("Claim Name nao possui digitos");
@@ -37,10 +37,10 @@ public class ValidatorClaimService {
 
     public Boolean validateNameClaimRole(JsonObject claim) {
         if(RoleEnum.fromEnum(claim.get(ROLE).getAsString()).equals(RoleEnum.NONE)){
-            LOG.info("Claim role invalido");
+            LOG.info("Claim Role invalido");
             return false;
         } else {
-            LOG.info("Claim role valido");
+            LOG.info("Claim Role valido");
             return true;
         }
     }

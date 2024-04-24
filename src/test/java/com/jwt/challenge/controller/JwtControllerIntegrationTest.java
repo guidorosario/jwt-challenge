@@ -34,7 +34,7 @@ public class JwtControllerIntegrationTest {
 
         webTestClient
                 .post()
-                .uri("/jwt/v1")
+                .uri("/jwt/v1/validate")
                 .body(BodyInserters.fromValue(validJwtMock()))
                 .exchange()
                 .expectStatus()
@@ -50,7 +50,7 @@ public class JwtControllerIntegrationTest {
 
         webTestClient
                 .post()
-                .uri("/jwt/v1")
+                .uri("/jwt/v1/validate")
                 .body(BodyInserters.fromValue(invalidJwtMock()))
                 .exchange()
                 .expectStatus()
@@ -67,7 +67,7 @@ public class JwtControllerIntegrationTest {
 
         webTestClient
                 .post()
-                .uri("/jwt/v1")
+                .uri("/jwt/v1/validate")
                 .body(BodyInserters.fromValue(invalidJwtClaimExceedMock()))
                 .exchange()
                 .expectStatus()
@@ -83,7 +83,7 @@ public class JwtControllerIntegrationTest {
 
         webTestClient
                 .post()
-                .uri("/jwt/v1")
+                .uri("/jwt/v1/validate")
                 .body(BodyInserters.fromValue(invalidJwt2ClaimMock()))
                 .exchange()
                 .expectStatus()
@@ -99,7 +99,7 @@ public class JwtControllerIntegrationTest {
 
         webTestClient
                 .post()
-                .uri("/jwt/v1")
+                .uri("/jwt/v1/validate")
                 .body(BodyInserters.fromValue(invalidJwtDigitClaimNameMock()))
                 .exchange()
                 .expectStatus()
@@ -115,7 +115,7 @@ public class JwtControllerIntegrationTest {
 
         webTestClient
                 .post()
-                .uri("/jwt/v1")
+                .uri("/jwt/v1/validate")
                 .body(BodyInserters.fromValue(invalidJwtClaimRoleMock()))
                 .exchange()
                 .expectStatus()
@@ -131,7 +131,7 @@ public class JwtControllerIntegrationTest {
 
         webTestClient
                 .post()
-                .uri("/jwt/v1")
+                .uri("/jwt/v1/validate")
                 .body(BodyInserters.fromValue(invalidJwtClaimSeedNoPrimeMock()))
                 .exchange()
                 .expectStatus()
@@ -147,7 +147,7 @@ public class JwtControllerIntegrationTest {
 
         webTestClient
                 .post()
-                .uri("/jwt/v1")
+                .uri("/jwt/v1/validate")
                 .body(BodyInserters.fromValue(invalidJwtClaimNameSizeExceedMock()))
                 .exchange()
                 .expectStatus()
@@ -164,7 +164,7 @@ public class JwtControllerIntegrationTest {
 
         webTestClient
                 .post()
-                .uri("/jwt/v2")
+                .uri("/jwt/v2/validate")
                 .header("Authorization", validJwtMock().jwt())
                 .exchange()
                 .expectStatus()
@@ -180,7 +180,7 @@ public class JwtControllerIntegrationTest {
 
         webTestClient
                 .post()
-                .uri("/jwt/v2")
+                .uri("/jwt/v2/validate")
                 .header("Authorization",invalidJwtMock().jwt())
                 .exchange()
                 .expectStatus()
@@ -197,7 +197,7 @@ public class JwtControllerIntegrationTest {
 
         webTestClient
                 .post()
-                .uri("/jwt/v2")
+                .uri("/jwt/v2/validate")
                 .header("Authorization", invalidJwtClaimExceedMock().jwt())
                 .exchange()
                 .expectStatus()
@@ -213,7 +213,7 @@ public class JwtControllerIntegrationTest {
 
         webTestClient
                 .post()
-                .uri("/jwt/v2")
+                .uri("/jwt/v2/validate")
                 .header("Authorization",invalidJwt2ClaimMock().jwt())
                 .exchange()
                 .expectStatus()
@@ -229,7 +229,7 @@ public class JwtControllerIntegrationTest {
 
         webTestClient
                 .post()
-                .uri("/jwt/v2")
+                .uri("/jwt/v2/validate")
                 .header("Authorization", invalidJwtDigitClaimNameMock().jwt())
                 .exchange()
                 .expectStatus()
@@ -245,7 +245,7 @@ public class JwtControllerIntegrationTest {
 
         webTestClient
                 .post()
-                .uri("/jwt/v2")
+                .uri("/jwt/v2/validate")
                 .header("Authorization",invalidJwtClaimRoleMock().jwt())
                 .exchange()
                 .expectStatus()
@@ -261,7 +261,7 @@ public class JwtControllerIntegrationTest {
 
         webTestClient
                 .post()
-                .uri("/jwt/v2")
+                .uri("/jwt/v2/validate")
                 .header("Authorization",invalidJwtClaimSeedNoPrimeMock().jwt())
                 .exchange()
                 .expectStatus()
@@ -277,7 +277,7 @@ public class JwtControllerIntegrationTest {
 
         webTestClient
                 .post()
-                .uri("/jwt/v2")
+                .uri("/jwt/v2/validate")
                 .header("Authorization",invalidJwtClaimNameSizeExceedMock().jwt())
                 .exchange()
                 .expectStatus()

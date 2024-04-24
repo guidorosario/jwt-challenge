@@ -4,7 +4,12 @@ plugins {
 	id 'java'
 	id 'com.palantir.docker' version '0.27.0'
 	id "com.palantir.docker-run" version "0.27.0"
+	id 'jacoco'
 
+}
+
+jacoco {
+	toolVersion = "0.8.12"
 }
 
 group = 'com.jwt.challenge'
@@ -37,8 +42,8 @@ dockerRun {
 	clean true
 	daemonize false
 }
-def projectName = "customer"
-def projectId = "customer"
+def projectName = "jwt-challenge"
+def projectId = "jwt-challenge"
 
 dependencies {
 
@@ -48,6 +53,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	implementation 'org.springframework.boot:spring-boot-starter-cache'
 	implementation 'org.springframework:spring-beans:5.3.22'
+	implementation'org.springframework.cloud:spring-cloud-starter-sleuth:3.1.11'
 
 	implementation 'org.springdoc:springdoc-openapi-maven-plugin:1.4'
 	// Swagger
